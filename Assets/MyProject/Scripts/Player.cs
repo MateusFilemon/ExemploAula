@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,12 +41,18 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
+
+        if (!photonView.IsMine) return;
+
         PlayerInputs();
+        RotatePlayer();
         //unity! executa esse metodo ai!
     }
 
     protected virtual void PlayerInputs() 
     {
+        
+
         direction.x = Input.GetAxis("Horizontal");
         direction.y = Input.GetAxis("Vertical");
         //y representa z(ir pra frente) , o z de um vector2 é sempre 0
@@ -60,7 +67,7 @@ public class Player : Character
     protected virtual void RotatePlayer() 
     {
         transform.Rotate(0, rotY * rotSpeed * Time.deltaTime, 0f);
-        //esse time.deltatime equaliza(todos viram 1) a rotaçao intependente da quantidade de frames da maquina
+        //esse time.deltatime equaliza(todos viram 1) a rotaçao independente da quantidade de frames da maquina
     }
 
     public override void Jump(float _value)
@@ -74,6 +81,14 @@ public class Player : Character
 
         rb.AddForce(Vector3.up * _value);
 
+    }
+
+    protected override void Animations()
+    {
+        base.Animations();
+
+        anim.SetFloat("SpeedX", direction.x);
+        anim.SetFloat("SpeedZ", direction.y);
     }
 
 }
