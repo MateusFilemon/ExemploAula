@@ -16,6 +16,7 @@ public class Player : Character
     {
         base.Awake();
         rb = GetComponent<Rigidbody>();
+        if(photonView.IsMine) Camera.main.gameObject.SetActive(false);
     }
 
     protected override void Move()

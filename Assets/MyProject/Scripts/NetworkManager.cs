@@ -3,13 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public static NetworkManager instance; //singleton, um unico objeto com essa classe(NetworkManager)
 
     [SerializeField] GameObject playerPrefab;
+    public Transform cameraPlayer;
 
+    private void Awake()
+    {
+        if (instance == null) 
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void Start()
     {
@@ -51,6 +66,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnJoinedRoom");
         Debug.Log("Playercount: " + PhotonNetwork.CurrentRoom.PlayerCount);
+
         photonView.RPC("CreatePlayerAvatar", PhotonNetwork.LocalPlayer);
             //photonView, chamado remoto
     }

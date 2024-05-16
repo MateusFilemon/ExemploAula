@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 public class Character : MonoBehaviourPun
 {
     [Header("Animations")]
@@ -13,6 +14,7 @@ public class Character : MonoBehaviourPun
     [Tooltip("Define a vida máxima do Personagem")]
     [SerializeField] protected float maxLife;
     protected bool dead;
+    [SerializeField] Image life;
 
     //Header dá titulo para as variaveis
     [Header("Movement Controller")]
@@ -28,6 +30,7 @@ public class Character : MonoBehaviourPun
     protected virtual void Awake()
     {
         currentLife = maxLife;
+        UpdateLifeInPhoton();
     }
 
     protected virtual void Update()
@@ -43,17 +46,39 @@ public class Character : MonoBehaviourPun
     #endregion
 
     #region Life Controller
+    
+    protected void UpdateLifeInPhoton() 
+    {
+        if (photonView.IsMine)
+        {
+            photonView.RPC("UpdateLife", RpcTarget.AllBuffered, currentLife);
+            //mostrar a vida para todos
+            //currentLife precisa estar pois é um metodo que pede um valor externo 
+        }
+    }
+    
+    [PunRPC]
+    protected void UpdateLife(float _currentLife) 
+    { 
+        currentLife = _currentLife;
+        life.fillAmount = currentLife / maxLife;
+    }
+
     public virtual void TakeDamage(float _value)
     {
         currentLife = Mathf.Max(currentLife - _value, 0);
         //-= e = currentLife - é igual
         if (currentLife == 0) Death();
 
+        UpdateLifeInPhoton();
+
     }
 
     public virtual void Heal(float _value)
     {
         currentLife = Mathf.Min(currentLife + _value, maxLife);
+        
+        UpdateLifeInPhoton();
     }
 
     protected virtual void Death()
