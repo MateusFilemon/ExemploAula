@@ -26,6 +26,19 @@ public class Character : MonoBehaviourPun
     protected bool canJump;
     [SerializeField] protected float jumpForce;
 
+    [Header("Attack System")]
+    //Attackspeed tempo entre ataques
+    [SerializeField] protected float attackSpeed;
+    //Tempo que demora até ficar em condição de atacar
+    [SerializeField] protected float attackDelay;
+    [SerializeField] protected float attackRange;
+    [SerializeField] protected Transform posAttack;
+    //difere aliados de inimigos
+    [SerializeField] protected LayerMask enemyLayer;
+    //tempo entre ataques, pode atacar se o tempo for maior que 0. O proximo ataque será no tempo 5 por exemplo, adiciona-se esse 5 com o attackSpeed
+    protected float nextAttackTime;
+    protected bool attacking;
+
     #region Unity Methods
     protected virtual void Awake()
     {

@@ -6,12 +6,14 @@ using Photon.Realtime;
 using Unity.VisualScripting;
 
 
+
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public static NetworkManager instance; //singleton, um unico objeto com essa classe(NetworkManager)
 
-    [SerializeField] GameObject playerPrefab;
-    public Transform cameraPlayer;
+    [SerializeField] GameObject playerPrefabTeamRed;
+    [SerializeField] GameObject playerPrefabTeamBlue;
+    [HideInInspector] public Transform cameraPlayer;
 
     private void Awake()
     {
@@ -79,10 +81,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Vector3 _pos = new Vector3(Random.Range(-3f, 3f), 2f, Random.Range(-3f, 3f));
             //posições aleatorias
 
-        //Instantiate
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            //Instantiate
             //instantiate normal é local
-        PhotonNetwork.Instantiate(playerPrefab.name, _pos, Quaternion.identity);
+            PhotonNetwork.Instantiate(playerPrefabTeamRed.name, _pos, Quaternion.identity);
             //quaternion controla a rotação, 4 valores
+        }
+        else 
+        {
+            PhotonNetwork.Instantiate(playerPrefabTeamBlue.name, _pos, Quaternion.identity);
+        }
+        
+        
     }
 
 
