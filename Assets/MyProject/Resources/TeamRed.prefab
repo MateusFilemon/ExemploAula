@@ -17,6 +17,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
+      propertyPath: attackDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
+      propertyPath: attackRange
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
+      propertyPath: attackSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}

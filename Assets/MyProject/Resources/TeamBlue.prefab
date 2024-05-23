@@ -17,6 +17,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
+      propertyPath: attackDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 184652952669221142, guid: fdbeb8f7883afda48910b6decededfaa, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 128
       objectReference: {fileID: 0}

@@ -32,7 +32,9 @@ public class Character : MonoBehaviourPun
     //Tempo que demora até ficar em condição de atacar
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected float attackDamage;
     [SerializeField] protected Transform posAttack;
+
     //difere aliados de inimigos
     [SerializeField] protected LayerMask enemyLayer;
     //tempo entre ataques, pode atacar se o tempo for maior que 0. O proximo ataque será no tempo 5 por exemplo, adiciona-se esse 5 com o attackSpeed
@@ -62,8 +64,10 @@ public class Character : MonoBehaviourPun
     
     protected void UpdateLifeInPhoton() 
     {
+        Debug.Log(1);
         if (photonView.IsMine)
         {
+            Debug.Log(2);
             photonView.RPC("UpdateLife", RpcTarget.AllBuffered, currentLife);
             //mostrar a vida para todos
             //currentLife precisa estar pois é um metodo que pede um valor externo 
@@ -81,9 +85,14 @@ public class Character : MonoBehaviourPun
     {
         currentLife = Mathf.Max(currentLife - _value, 0);
         //-= e = currentLife - é igual
-        if (currentLife == 0) Death();
-
+        if (currentLife == 0) Death(true);
+        Debug.Log(currentLife);
         UpdateLifeInPhoton();
+
+        if (currentLife == 0 && photonView.IsMine) 
+        {
+            photonView.RPC("Death", RpcTarget.AllBuffered, true);
+        }
 
     }
 
@@ -94,7 +103,8 @@ public class Character : MonoBehaviourPun
         UpdateLifeInPhoton();
     }
 
-    protected virtual void Death()
+    [PunRPC]
+    protected virtual void Death(bool _value)
     {
         dead = true;
     }

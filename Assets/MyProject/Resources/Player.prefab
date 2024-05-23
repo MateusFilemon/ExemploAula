@@ -190,9 +190,10 @@ MonoBehaviour:
     m_Bits: 8
   groundDistance: 0.2
   jumpForce: 500
-  attackSpeed: 0.25
-  attackDelay: 0.45
+  attackSpeed: 0.15
+  attackDelay: 0.25
   attackRange: 0.5
+  attackDamage: 10
   posAttack: {fileID: 2848017557486901721}
   enemyLayer:
     serializedVersion: 2
@@ -604,12 +605,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8569091266348826929}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.746, y: 0.486, z: -0}
+  m_LocalRotation: {x: -0.07314489, y: 0.000050163995, z: -0.00047235406, w: 0.99732125}
+  m_LocalPosition: {x: 0.03239194, y: 0.38547936, z: 0.835302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8666578128562146233}
+  m_Father: {fileID: 3038409778859946766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7057266139637101681
 PrefabInstance:
@@ -670,7 +671,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5465940246521907071, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2848017557486901721}
     m_AddedComponents:
@@ -681,6 +682,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1672529528393797380}
   m_SourcePrefab: {fileID: 100100000, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
+--- !u!4 &3038409778859946766 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
+  m_PrefabInstance: {fileID: 7057266139637101681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3502366198278293984 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
@@ -749,8 +755,3 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
---- !u!4 &8666578128562146233 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 0cf0624b6c0ae314c9d5f2b27a91bd75, type: 3}
-  m_PrefabInstance: {fileID: 7057266139637101681}
-  m_PrefabAsset: {fileID: 0}

@@ -34,6 +34,13 @@ public class Player : Character
     {
         base.Update();
 
+        if (dead) 
+        {
+            direction.x = 0f;
+            direction.y = 0f;
+            return;
+        }
+
         if (!photonView.IsMine) return;
 
         PlayerInputs();
@@ -94,7 +101,8 @@ public class Player : Character
 
         foreach(var _enemy in _enemies) 
         {
-            Debug.Log("Acerto o inimgo: " + _enemy.name);
+            Debug.Log("Acerto o inimigo: " + _enemy.name);
+            _enemy.GetComponent<Player>().TakeDamage(attackDamage);
         }
     }
 
